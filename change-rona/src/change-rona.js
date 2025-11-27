@@ -24,7 +24,7 @@ class changeRona extends HTMLElement {
 		logger.info('[change-rona] Init change rona plugin')
 		await this.sleep (5000);
 
-		await Desktop.config.init({widgetName: "change-rona", widgetProvider: "Aashish (aaberry)"}); 
+		await Desktop.config.init({widgetName: "change-rona", widgetProvider: "ProximusNXT"}); 
 		if (this.delaySeconds) {
 			logger.info('[change-rona]Delay read from layout: ${this.delaySeconds} seconds.');
 			this.delaySeconds = this.delaySeconds * 1000;
@@ -36,37 +36,11 @@ class changeRona extends HTMLElement {
 		logger.info('[change-rona] Add event listeners')
 		this.agentInteractionEvents();
 
-		logger.info('[change-rona] Force agent to be available')
-		this.triggerChange();
-	}
-
-	async pauseRecording(interactionId) {
-		try {
-			const result = await Desktop.agentContact.pauseRecording({ interactionId });
-			logger.info(result);
-		}
-		catch (error) {
-			logger.error (error);
-		}
+		// logger.info('[change-rona] Force agent to be available')
+		// this.triggerChange();
 	}
 
 	async agentInteractionEvents() {
-
-		Desktop.agentContact.addEventListener("eAgentContactAssigned", (e => {
-			// Identify Inbound calls and pause recording when call is answered
-			if (e.data.interaction.mediaType === 'telephony' && e.data.interaction.contactDirection.type === 'INBOUND') {
-				logger.info(`interactionId: ${e.data.interactionId}`);
-				this.pauseRecording(e.data.interactionId);
-			}
-		}));
-
-		Desktop.agentContact.addEventListener("ePauseRecording", (e => {
-			logger.info("Recording Paused!");
-		}));
-
-		Desktop.agentContact.addEventListener("eResumeRecording", (e => {
-			logger.info("Recording Resumed!");
-		}));
 
 		Desktop.agentContact.addEventListener("eAgentOfferContactRona", (e => {
 			logger.info('[change-rona]RONA triggered!')
