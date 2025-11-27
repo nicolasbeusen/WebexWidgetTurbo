@@ -48,6 +48,7 @@ class changeRona extends HTMLElement {
 		}));
 	}
 
+	
 	async triggerChange () {
 		await this.sleep(this.delaySeconds);
 		try {
