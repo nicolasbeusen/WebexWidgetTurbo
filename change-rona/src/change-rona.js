@@ -36,8 +36,8 @@ class changeRona extends HTMLElement {
 		logger.info('[change-rona] Add event listeners')
 		this.agentInteractionEvents();
 
-		// logger.info('[change-rona] Force agent to be available')
-		// this.triggerChange();
+		logger.info('[change-rona] Force agent to be available')
+		this.triggerChange();
 	}
 
 	async agentInteractionEvents() {
